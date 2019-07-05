@@ -1,0 +1,40 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the sockMerchant function below.
+def sockMerchant(n, ar):
+    ar.sort() //sort the list
+    pairs = 0 //initialize no of pairs to 0
+    count = 1 //initialize count of a particular color to 1
+    color = ar[0]
+
+    for i in range(1,n): //in an array of n socks there cant be more than n colors of socks
+        if(ar[i]==color): //checks if !st ele= 0th ele
+            count+=1 // increases count
+        else:
+            pairs += int(count/2) // after gathering no of socks of a particular type pair it evenly
+            count = 1 //reset
+            color= ar[i] //the last pos of ele of sorted array is set to i
+    
+    pairs += int(count/2)
+            
+    return pairs
+
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input())
+
+    ar = list(map(int, input().rstrip().split()))
+
+    result = sockMerchant(n, ar)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
